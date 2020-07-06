@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Usuarios_C extends CI_Controller {
 
-    protected function __construct(){
-        $this->load->model('User_Model');
+    public function index(){
+        
     }
 
     public function newUser()
@@ -17,20 +17,29 @@ class Usuarios_C extends CI_Controller {
             "surname" => $this->input->post('surname'),
             "email" => $this->input->post('email'),
             "password" => md5(trim($this->input->post('password'))),
-            "password_confirm" =>  md5(trim($this->input->post('password_confirm')))
-        ]; 
+        ];
+
+        $passwordConfirm = md5(trim($this->input->post('password_confirm')));
         
-        if($this->validarDadosDeCadastro($newUserData)){            
-            $this->User_Model->salvarUsuario($newUserData);
-            $this->load->templateView('Usuarios/Usuarios_View.php');
+        if($this->validarDadosDeCadastro($newUserData, $passwordConfirm)){
+            $this->load->model('User_Model');           
+            $this->User_Model->saveUser($newUserData);
+            $this->session->set_flashdata('success', 'Usuário cadastrado com sucesso!');
+            redirect('/');
+            // $this->load->templateView('Usuarios/Usuarios_View.php');
         }        
     }
 
-    protected function validarDadosDeCadastro($pnewUserData){
-        $validacaoSenha = $this->comparaSenhasCadastro($pnewUserData['password'], $pnewUserData['confirma_password']);
+    public function formularioCadastroUsuario(){
+        $this->load->templateView('Usuarios/FormularioCadastrarUsuario_View.php');
+    }
+
+    protected function validarDadosDeCadastro($pNewUserData, $pPasswordConfirm){
+        $validacaoSenha = $this->comparaSenhasCadastro($pNewUserData['password'], $pPasswordConfirm);
         if(!$validacaoSenha){
             $this->session->set_flashdata('danger', 'Senhas informadas são diferentes.');
-			$this->load->templateView('Usuarios/FormularioCadastroUsuario_View.php');
+            // $this->formularioCadastroUsuario();
+            $this->load->templateView('Usuarios/FormularioCadastrarUsuario_View.php');
         }else{
             return True;
         }

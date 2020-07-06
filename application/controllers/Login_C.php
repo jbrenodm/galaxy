@@ -12,7 +12,7 @@ class Login_C extends CI_Controller {
 		}else{
 			// print_r("Entrou aqui");
 			// die;
-			$this->load->templateView("Padrao/FormularioLogin_View");	
+			$this->load->templateView("Padrao/FormularioLogin_View.php");	
 		}
 	}
 
@@ -30,7 +30,7 @@ class Login_C extends CI_Controller {
 			if($loggedUser){
 				$this->session->set_userdata(['logged_user' => $loggedUser]);
 				$this->session->set_flashdata('success', 'Logado com sucesso');
-				$this->load->templateView('Padrao/Menu_View', $loggedUser);
+				$this->load->templateView('Padrao/Menu_View.php', $loggedUser);
 				// redirect("Padrao/Menu_View");
 			}else{
 				$this->session->set_flashdata('danger', 'Usuário ou Senha inválida.');
@@ -40,7 +40,7 @@ class Login_C extends CI_Controller {
 	}
 
 	public function mostraMenuInicial($pUsuario){
-		$this->load->templateView('Padrao/Menu_View', $pUsuario);
+		$this->load->templateView('Padrao/Menu_View.php', $pUsuario);
 	}
 
 	public function logout(){

@@ -37,8 +37,8 @@
                           [
                             "type" => "password",
                             "class" => "form-control form-control-user",
-                            "id" => "senha",
-                            "name" => "senha",
+                            "id" => "password",
+                            "name" => "password",
                             "placeholder" => "Senha"
                           ]
                         );
@@ -70,10 +70,21 @@
 
                   <hr>
                   <div class="text-center">
-                    <a class="small" href="forgot-password.html">Esqueceu a Senha?</a>
+                    <!-- <a class="small" href="forgot-password.html">Esqueceu a Senha?</a> -->
                   </div>
                   <div class="text-center">
-                    <a class="small" href="register.html">Criar Usuário!</a>
+                    <?php
+                      echo form_open("Usuarios_C/formularioCadastroUsuario", ["class" => ""]);
+                      echo form_button(
+                        [
+                          "class" => "btn btn-default btn-sm",
+                          "type" => "submit",
+                          "content" => "Criar Usuário!" 
+                        ]
+                      );
+                      echo form_close();  
+                    ?>
+                    <!-- <a class="small" href="Usuario_C/formularioCadastroUsuario">Criar Usuário!</a> -->
                   </div>
                 </div>
               </div>

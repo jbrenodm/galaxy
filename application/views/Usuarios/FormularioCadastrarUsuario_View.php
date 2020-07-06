@@ -12,10 +12,13 @@
               <div class="text-center">
                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
               </div>
-              <form class="user">
+              <!-- <form class="user"> -->
+                <?php
+                  echo form_open("Usuarios_C/newUser", ["class" => "user"]);
+                ?>
                 <div class="form-group row">
                   <div class="col-sm-6 mb-3 mb-sm-0">
-                    <input type="text" name="nome" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
+                    <input type="text" name="name" class="form-control form-control-user" id="exampleFirstName" placeholder="First Name">
                   </div>
                   <div class="col-sm-6">
                     <input type="text" name="surname" class="form-control form-control-user" id="exampleLastName" placeholder="Last Name">
@@ -32,9 +35,19 @@
                     <input type="password" name="password_confirm" class="form-control form-control-user" id="exampleRepeatPassword" placeholder="Repeat Password">
                   </div>
                 </div>
-                <a href="login.html" class="btn btn-primary btn-user btn-block">
+                <!-- <a href="login.html" class="btn btn-primary btn-user btn-block">
                   Register Account
-                </a>
+                </a> -->
+                <?php
+                  echo form_button(
+                    [
+                      "class" => "btn btn-primary btn-user btn-block",
+                      "type" => "submit",
+                      "content" => "Cadastrar!" 
+                    ]
+                  );
+                  echo form_close();  
+                ?>
                 <hr>
                 <!-- <a href="index.html" class="btn btn-google btn-user btn-block">
                   <i class="fab fa-google fa-fw"></i> Register with Google
@@ -42,14 +55,26 @@
                 <a href="index.html" class="btn btn-facebook btn-user btn-block">
                   <i class="fab fa-facebook-f fa-fw"></i> Register with Facebook
                 </a> -->
-              </form>
+              <!-- </form> -->
               <hr>
-              <div class="text-center">
+              <!-- <div class="text-center">
                 <a class="small" href="forgot-password.html">Forgot Password?</a>
-              </div>
-              <div class="text-center">
+              </div> -->
+              <!-- <div class="text-center">
                 <a class="small" href="login.html">Already have an account? Login!</a>
-              </div>
+              </div> -->
+              <?php
+                  echo form_open("login_C", ["class" => ""]);
+                  echo form_button(
+                    [
+                      "class" => "btn btn-default small text-center",
+                      "type" => "submit",
+                      "content" => "já possui uma conta? Login!" 
+                    ]
+                  );
+                  echo form_close();  
+                ?>
+              
             </div>
           </div>
         </div>
